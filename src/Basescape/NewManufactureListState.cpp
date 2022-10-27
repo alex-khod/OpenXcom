@@ -95,7 +95,7 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 
 	_txtCategory->setText(tr("STR_CATEGORY"));
 
-	_lstManufacture->setColumns(3, 156, 120, 10);
+	_lstManufacture->setColumns(4, 106, 120, 10, 50);
 	_lstManufacture->setSelectable(true);
 	_lstManufacture->setBackground(_window);
 	_lstManufacture->setMargin(2);
@@ -162,6 +162,38 @@ void NewManufactureListState::btnOkClick(Action *)
  * Opens the Production settings screen.
  * @param action A pointer to an Action.
  */
+
+int NewManufactureListState::getApproxMonthlyProfit(RuleManufacture *item) const
+{	
+
+	auto getSaleValue = [] (RuleManufacture * item)
+	{	 
+		int _producedItemsValue = 0;
+		auto ruleCraft = item->getProducedCraft();
+		if (ruleCraft)
+		{
+			_producedItemsValue += ruleCraft->getSellCost();
+		}
+		else
+		{
+			for (auto &i : item->getProducedItems())
+			{
+				int64_t adjustedSellValue = i.first->getSellCost();
+				adjustedSellValue = adjustedSellValue * i.second * _game->getSavedGame()->getSellPriceCoefficient() / 100;
+				_producedItemsValue += adjustedSellValue;
+			}
+		}
+		return _producedItemsValue;
+	};
+	
+	int assumeNumEngineers = 10;
+	static const int AVG_HOURS_PER_MONTH = (365 * 24) / 12;	
+	int manHoursPerMonth = AVG_HOURS_PER_MONTH * assumeNumEngineers;
+	float itemsPerMonth = (float) manHoursPerMonth / (float)item->getManufactureTime();
+
+	return (getSaleValue(item) - item->getManufactureCost()) * itemsPerMonth;
+}
+
 void NewManufactureListState::lstProdClickLeft(Action *)
 {
 	_lstScroll = _lstManufacture->getScroll();
@@ -435,8 +467,10 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 				}
 			}
 
-			_lstManufacture->addRow(3, tr(manuf->getName()).c_str(), tr(manuf->getCategory()).c_str(), ss.str().c_str());
-			_displayedStrings.push_back(manuf->getName().c_str());
+			// monthly profit assuming ready materials and 10 engineers
+			int monthlyProfit = getApproxMonthlyProfit(*it);
+			_lstManufacture->addRow(4, tr((*it)->getName()).c_str(), tr((*it)->getCategory()).c_str(), ss.str().c_str(), Unicode::formatFunding(monthlyProfit).c_str());
+			_displayedStrings.push_back((*it)->getName().c_str());
 
 			// colors
 			if (basicFilter == MANU_FILTER_FACILITY_REQUIRED)

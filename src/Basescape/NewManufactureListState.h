@@ -54,7 +54,7 @@ private:
 	std::vector<std::string> _catStrings;
 	std::vector<std::string> _displayedStrings;
 	Uint8 _colorNormal, _colorNew;
-	Uint8 _colorHidden, _colorFacilityRequired;
+	Uint8 _colorHidden, _colorFacilityRequired;	
 
 public:
 	/// Creates the state.
@@ -80,6 +80,7 @@ public:
 	void btnMarkAllAsSeenClick(Action *action);
 	/// Fills the list of possible productions.
 	void fillProductionList(bool refreshCategories);
+	int getApproxMonthlyProfit(RuleManufacture *item) const;
 };
 
 }
