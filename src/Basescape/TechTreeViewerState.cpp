@@ -18,6 +18,7 @@
  */
 #include "TechTreeViewerState.h"
 #include "TechTreeSelectState.h"
+#include "../Ufopaedia/Ufopaedia.h"
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -125,7 +126,8 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	_lstRight->setSelectable(true);
 	_lstRight->setBackground(_window);
 	_lstRight->setWordWrap(true);
-	_lstRight->onMouseClick((ActionHandler)&TechTreeViewerState::onSelectRightTopic);
+	// .., 0 - allow any button to fire event
+	_lstRight->onMouseClick((ActionHandler)&TechTreeViewerState::onSelectRightTopic, 0);
 
 	_lstFull->setColumns(1, 288);
 	_lstFull->setSelectable(true);
@@ -1868,15 +1870,23 @@ void TechTreeViewerState::onSelectLeftTopic(Action *)
 * Selects the topic.
 * @param action Pointer to an action.
 */
-void TechTreeViewerState::onSelectRightTopic(Action *)
+void TechTreeViewerState::onSelectRightTopic(Action *action)
 {
 	int index = _lstRight->getSelectedRow();
-	if (_rightFlags[index] > TTV_NONE)
+	if (action->getDetails()->button.button == SDL_BUTTON_LEFT)
+	{			
+		if (_rightFlags[index] > TTV_NONE)
+		{
+			_history.push_back(std::make_pair(_selectedTopic, _selectedFlag));
+			_selectedFlag = _rightFlags[index];
+			_selectedTopic = _rightTopics[index];
+			initLists();
+		}
+	}
+	else if (action->getDetails()->button.button == SDL_BUTTON_RIGHT)			
 	{
-		_history.push_back(std::make_pair(_selectedTopic, _selectedFlag));
-		_selectedFlag = _rightFlags[index];
-		_selectedTopic = _rightTopics[index];
-		initLists();
+		std::string articleId = _rightTopics[index];
+		Ufopaedia::openArticle(_game, articleId);	
 	}
 }
 
