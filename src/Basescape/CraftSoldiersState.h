@@ -58,6 +58,10 @@ private:
 public:
 	/// Creates the Craft Soldiers state.
 	CraftSoldiersState(Base *base, size_t craft);
+  void sortByAgentType(Action *action);
+  void sortByTU(Action *action);
+  void sortByHealth(Action *action);
+  void sortByFireAcc(Action *action);
 	/// Cleans up the Craft Soldiers state.
 	~CraftSoldiersState();
 	/// Handler for changing the sort by combobox.

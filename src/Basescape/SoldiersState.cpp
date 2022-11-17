@@ -239,7 +239,37 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 	_lstSoldiers->onRightArrowClick((ActionHandler)&SoldiersState::lstItemsRightArrowClick);
 	_lstSoldiers->onMouseClick((ActionHandler)&SoldiersState::lstSoldiersClick);
 	_lstSoldiers->onMousePress((ActionHandler)&SoldiersState::lstSoldiersMousePress);
+
+	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByAgentType, Options::keyBattleActionItem1);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByTU, Options::keyBattleActionItem2);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByHealth, Options::keyBattleActionItem3);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByFireAcc, Options::keyBattleActionItem4);
 }
+
+void SoldiersState::sortByAgentType(Action *action)
+{
+	_cbxSortBy->setSelected(3);
+	cbxSortByChange(action);
+}
+
+void SoldiersState::sortByTU(Action *action)
+{
+	_cbxSortBy->setSelected(10);
+	cbxSortByChange(action);
+}
+
+void SoldiersState::sortByHealth(Action *action)
+{
+	_cbxSortBy->setSelected(12);
+	cbxSortByChange(action);
+}
+
+void SoldiersState::sortByFireAcc(Action *action)
+{
+	_cbxSortBy->setSelected(15);
+	cbxSortByChange(action);
+}
+
 
 /**
  * cleans up dynamic state

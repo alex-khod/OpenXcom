@@ -54,7 +54,11 @@ private:
 	void initList(size_t scrl);
 public:
 	/// Creates the Soldiers state.
-	SoldiersState(Base *base);
+  SoldiersState(Base *base);  
+  void sortByAgentType(Action *action);
+  void sortByTU(Action *action);
+  void sortByHealth(Action *action);
+  void sortByFireAcc(Action *action);
 	/// Cleans up the Soldiers state.
 	~SoldiersState();
 	/// Handler for changing the sort by combobox.

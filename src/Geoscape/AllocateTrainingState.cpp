@@ -191,6 +191,35 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 	_lstSoldiers->onRightArrowClick((ActionHandler)&AllocateTrainingState::lstItemsRightArrowClick);
 	_lstSoldiers->onMouseClick((ActionHandler)&AllocateTrainingState::lstSoldiersClick);
 	_lstSoldiers->onMousePress((ActionHandler)&AllocateTrainingState::lstSoldiersMousePress);
+
+	_cbxSortBy->onKeyboardPress((ActionHandler)&AllocateTrainingState::sortByAgentType, Options::keyBattleActionItem1);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&AllocateTrainingState::sortByTU, Options::keyBattleActionItem2);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&AllocateTrainingState::sortByHealth, Options::keyBattleActionItem3);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&AllocateTrainingState::sortByFireAcc, Options::keyBattleActionItem4);
+}
+
+void AllocateTrainingState::sortByAgentType(Action *action)
+{
+	_cbxSortBy->setSelected(3);
+	cbxSortByChange(action);
+}
+
+void AllocateTrainingState::sortByTU(Action *action)
+{
+	_cbxSortBy->setSelected(10);
+	cbxSortByChange(action);
+}
+
+void AllocateTrainingState::sortByHealth(Action *action)
+{
+	_cbxSortBy->setSelected(12);
+	cbxSortByChange(action);
+}
+
+void AllocateTrainingState::sortByFireAcc(Action *action)
+{
+	_cbxSortBy->setSelected(15);
+	cbxSortByChange(action);
 }
 
 /**

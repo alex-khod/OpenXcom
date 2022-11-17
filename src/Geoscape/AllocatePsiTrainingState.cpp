@@ -179,7 +179,23 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 	_lstSoldiers->onRightArrowClick((ActionHandler)&AllocatePsiTrainingState::lstItemsRightArrowClick);
 	_lstSoldiers->onMouseClick((ActionHandler)&AllocatePsiTrainingState::lstSoldiersClick);
 	_lstSoldiers->onMousePress((ActionHandler)&AllocatePsiTrainingState::lstSoldiersMousePress);
+
+	_cbxSortBy->onKeyboardPress((ActionHandler)&AllocatePsiTrainingState::sortByPSIStrength, Options::keyBattleActionItem1);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&AllocatePsiTrainingState::sortByPSISkill, Options::keyBattleActionItem2);
 }
+
+void AllocatePsiTrainingState::sortByPSIStrength(Action *action)
+{
+	_cbxSortBy->setSelected(20);
+	cbxSortByChange(action);
+}
+
+void AllocatePsiTrainingState::sortByPSISkill(Action *action)
+{
+	_cbxSortBy->setSelected(21);
+	cbxSortByChange(action);
+}
+
 /**
  * cleans up dynamic state
  */

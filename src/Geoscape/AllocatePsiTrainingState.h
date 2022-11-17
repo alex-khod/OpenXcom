@@ -58,7 +58,9 @@ private:
 	void initList(size_t scrl);
 public:
 	/// Creates the Psi Training state.
-	AllocatePsiTrainingState(Base *base);
+  AllocatePsiTrainingState(Base *base);
+  void sortByPSIStrength(Action *action);
+  void sortByPSISkill(Action *action);
 	/// Cleans up the Psi Training state.
 	~AllocatePsiTrainingState();
 	/// Handler for changing the sort by combobox.

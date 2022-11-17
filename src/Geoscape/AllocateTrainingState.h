@@ -58,7 +58,11 @@ private:
 	void initList(size_t scrl);
 public:
 	/// Creates the Psi Training state.
-	AllocateTrainingState(Base *base);
+  AllocateTrainingState(Base *base);
+  void sortByAgentType(Action *action);
+  void sortByTU(Action *action);
+  void sortByHealth(Action *action);
+  void sortByFireAcc(Action *action);
 	/// Cleans up the Psi Training state.
 	~AllocateTrainingState();
 	/// Handler for changing the sort by combobox.

@@ -151,7 +151,39 @@ CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft
 	_lstSoldiers->onRightArrowClick((ActionHandler)&CraftArmorState::lstItemsRightArrowClick);
 	_lstSoldiers->onMouseClick((ActionHandler)&CraftArmorState::lstSoldiersClick, 0);
 	_lstSoldiers->onMousePress((ActionHandler)&CraftArmorState::lstSoldiersMousePress);
+
+	//auto p = [](CraftArmorState *state, size_t idx) { state->_cbxSortBy->setSelected(idx); state->_cbxSortBy };
+	//_cbxSortBy->onKeyboardPress(p(this, 3), Options::keyBattleActionItem1);		
+	
+	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByAgentType, Options::keyBattleActionItem1);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByTU, Options::keyBattleActionItem2);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByHealth, Options::keyBattleActionItem3);
+	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByFireAcc, Options::keyBattleActionItem4);
 }
+
+void CraftArmorState::sortByAgentType(Action *action){
+	_cbxSortBy->setSelected(3);
+	cbxSortByChange(action);
+}
+
+void CraftArmorState::sortByTU(Action *action)
+{
+	_cbxSortBy->setSelected(10);
+	cbxSortByChange(action);
+}
+
+void CraftArmorState::sortByHealth(Action *action)
+{
+	_cbxSortBy->setSelected(12);
+	cbxSortByChange(action);
+}
+
+void CraftArmorState::sortByFireAcc(Action *action)
+{
+	_cbxSortBy->setSelected(15);
+	cbxSortByChange(action);
+}
+
 
 /**
  * cleans up dynamic state

@@ -55,7 +55,11 @@ private:
 	void initList(size_t scrl);
 public:
 	/// Creates the Craft Armor state.
-	CraftArmorState(Base *base, size_t craft);
+  CraftArmorState(Base *base, size_t craft);
+  void sortByAgentType(Action *action);
+  void sortByTU(Action *action);
+  void sortByHealth(Action *action);
+  void sortByFireAcc(Action *action);
 	/// Cleans up the Craft Armor state.
 	~CraftArmorState();
 	/// Handler for changing the sort by combobox.
