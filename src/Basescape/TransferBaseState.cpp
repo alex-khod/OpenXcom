@@ -19,6 +19,7 @@
 #include "TransferBaseState.h"
 #include <sstream>
 #include "../Engine/Game.h"
+#include "../Engine/Action.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
 #include "../Engine/Options.h"
@@ -33,6 +34,7 @@
 #include "../Mod/RuleRegion.h"
 #include "TransferItemsState.h"
 #include "../Battlescape/DebriefingState.h"
+#include "../Basescape/SellState.h"
 
 namespace OpenXcom
 {
@@ -89,7 +91,7 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 	_lstBases->setSelectable(true);
 	_lstBases->setBackground(_window);
 	_lstBases->setMargin(2);
-	_lstBases->onMouseClick((ActionHandler)&TransferBaseState::lstBasesClick);
+	_lstBases->onMouseClick((ActionHandler)&TransferBaseState::lstBasesClick, 0);
 
 	int row = 0;
 	for (auto* xbase : *_game->getSavedGame()->getBases())
@@ -135,9 +137,16 @@ void TransferBaseState::btnCancelClick(Action *)
  * Shows the Transfer screen for the selected base.
  * @param action Pointer to an action.
  */
-void TransferBaseState::lstBasesClick(Action *)
+void TransferBaseState::lstBasesClick(Action *action)
 {
-	_game->pushState(new TransferItemsState(_base, _bases[_lstBases->getSelectedRow()], _debriefingState));
+	if (action->getDetails()->button.button == SDL_BUTTON_LEFT)
+	{
+		_game->pushState(new TransferItemsState(_base, _bases[_lstBases->getSelectedRow()], _debriefingState));
+	}
+	else if (action->getDetails()->button.button == SDL_BUTTON_RIGHT)
+	{		
+		_game->pushState(new SellState(_bases[_lstBases->getSelectedRow()], 0, OPT_BATTLESCAPE));
+	}
 }
 
 }
