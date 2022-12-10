@@ -3767,6 +3767,16 @@ void BattleUnit::addMeleeExp()
 	_exp.melee++;
 }
 
+bool BattleUnit::hasGainedMeleeExperience()
+{
+	return _exp.melee;
+}
+
+bool BattleUnit::hasGainedManaExperience()
+{
+	return _exp.mana;
+}
+
 /**
  * Did the unit gain any experience yet?
  */

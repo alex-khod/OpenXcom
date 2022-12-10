@@ -2037,9 +2037,13 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 		resetUiButton();
 		toggleKneelButton(0);
 		return;
-	}
+	}	
 
-	_txtName->setText(battleUnit->getName(_game->getLanguage(), false));
+	std::string exp_mark = battleUnit->hasGainedAnyExperience() ? "+" : "";
+	exp_mark += battleUnit->hasGainedMeleeExperience() ? "-" : "";
+	exp_mark += battleUnit->hasGainedManaExperience() ? "*" : "";											
+
+	_txtName->setText(exp_mark + battleUnit->getName(_game->getLanguage(), false));
 	Soldier *soldier = battleUnit->getGeoscapeSoldier();
 	if (soldier != 0)
 	{

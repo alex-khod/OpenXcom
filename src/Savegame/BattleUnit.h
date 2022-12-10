@@ -481,6 +481,8 @@ public:
 	void addManaExp(int weaponStat);
 	/// Adds one to the melee exp counter.
 	void addMeleeExp();
+	bool hasGainedMeleeExperience();
+	bool hasGainedManaExperience();
 	/// Did the unit gain any experience yet?
 	bool hasGainedAnyExperience();
 	/// Updates the stats of a Geoscape soldier.
