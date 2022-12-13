@@ -48,6 +48,7 @@ private:
 	Base *_base;
 	std::vector<Soldier *> _origSoldierOrder, _filteredListOfSoldiers;
 	std::vector<SortFunctor *> _sortFunctors;
+	std::vector<size_t> _indices;
 	getStatFn_t _dynGetter;
 	std::vector<std::string> _availableOptions;
 	///initializes the display list based on the craft soldier's list and the position to display

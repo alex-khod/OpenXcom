@@ -395,9 +395,11 @@ void SoldiersState::init()
 void SoldiersState::initList(size_t scrl)
 {
 	_lstSoldiers->clearList();
+	_indices.clear();
 
 	_filteredListOfSoldiers.clear();
 
+	size_t i=0;
 	std::string selAction = "STR_SOLDIER_INFO";
 	if (!_availableOptions.empty())
 	{
@@ -411,12 +413,12 @@ void SoldiersState::initList(size_t scrl)
 
 		// all soldiers in the base
 		_filteredListOfSoldiers = *_base->getSoldiers();
+		for (auto &soldier : _filteredListOfSoldiers) _indices.push_back(i++);			
 	}
 	else
 	{
 		offset = 20;
-		_lstSoldiers->setArrowColumn(-1, ARROW_VERTICAL);
-
+		_lstSoldiers->setArrowColumn(-1, ARROW_VERTICAL);		
 		// filtered list of soldiers eligible for transformation
 		RuleSoldierTransformation *transformationRule = _game->getMod()->getSoldierTransformation(selAction);
 		if (transformationRule)
@@ -431,14 +433,18 @@ void SoldiersState::initList(size_t scrl)
 				if (soldier->isEligibleForTransformation(transformationRule))
 				{
 					_filteredListOfSoldiers.push_back(soldier);
+					_indices.push_back(i);
 				}
+				i++;
 			}
 			for (auto* deadMan : *_game->getSavedGame()->getDeadSoldiers())
 			{
 				if (deadMan->isEligibleForTransformation(transformationRule))
 				{
 					_filteredListOfSoldiers.push_back(deadMan);
+					_indices.push_back(i);
 				}
+				i++;
 			}
 		}
 	}
@@ -712,7 +718,7 @@ void SoldiersState::lstSoldiersClick(Action *action)
 	}
 	if ((selAction == "STR_SOLDIER_INFO" && (action->getDetails()->button.button == SDL_BUTTON_LEFT)) || (action->getDetails()->button.button == SDL_BUTTON_RIGHT))
 	{		
-		_game->pushState(new SoldierInfoState(_base, _lstSoldiers->getSelectedRow()));
+		_game->pushState(new SoldierInfoState(_base, _indices[_lstSoldiers->getSelectedRow()]));
 	}
 	else
 	{
