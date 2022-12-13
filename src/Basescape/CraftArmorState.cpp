@@ -17,6 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "CraftArmorState.h"
+#include "../Basescape/SoldierInfoState.h"
 #include <climits>
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -524,7 +525,12 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 			}
 		}
 		else if (action->getDetails()->button.button == SDL_BUTTON_RIGHT)
-		{
+		{			
+			if (_game->isCtrlPressed())
+			{
+				_game->pushState(new SoldierInfoState(_base, _lstSoldiers->getSelectedRow()));
+			} else
+			{			
 			SavedGame *save;
 			save = _game->getSavedGame();
 			Armor *a = _game->getMod()->getArmor(save->getLastSelectedArmor());
@@ -568,6 +574,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 					s->prepareStatsWithBonuses(_game->getMod()); // refresh stats for sorting
 					_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 2, tr(a->getType()));
 				}
+			}
 			}
 		}
 		else if (action->getDetails()->button.button == SDL_BUTTON_MIDDLE)
