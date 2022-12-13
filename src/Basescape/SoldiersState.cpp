@@ -237,7 +237,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 	_lstSoldiers->setMargin(8);
 	_lstSoldiers->onLeftArrowClick((ActionHandler)&SoldiersState::lstItemsLeftArrowClick);
 	_lstSoldiers->onRightArrowClick((ActionHandler)&SoldiersState::lstItemsRightArrowClick);
-	_lstSoldiers->onMouseClick((ActionHandler)&SoldiersState::lstSoldiersClick);
+	_lstSoldiers->onMouseClick((ActionHandler)&SoldiersState::lstSoldiersClick, 0);
 	_lstSoldiers->onMousePress((ActionHandler)&SoldiersState::lstSoldiersMousePress);
 
 	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByAgentType, Options::keyBattleActionItem1);
@@ -710,8 +710,8 @@ void SoldiersState::lstSoldiersClick(Action *action)
 	{
 		selAction = _availableOptions.at(_cbxScreenActions->getSelected());
 	}
-	if (selAction == "STR_SOLDIER_INFO")
-	{
+	if (selAction == "STR_SOLDIER_INFO" || (action->getDetails()->button.button == SDL_BUTTON_RIGHT))
+	{		
 		_game->pushState(new SoldierInfoState(_base, _lstSoldiers->getSelectedRow()));
 	}
 	else
