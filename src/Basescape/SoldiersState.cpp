@@ -710,7 +710,7 @@ void SoldiersState::lstSoldiersClick(Action *action)
 	{
 		selAction = _availableOptions.at(_cbxScreenActions->getSelected());
 	}
-	if (selAction == "STR_SOLDIER_INFO" || (action->getDetails()->button.button == SDL_BUTTON_RIGHT))
+	if ((selAction == "STR_SOLDIER_INFO" && (action->getDetails()->button.button == SDL_BUTTON_LEFT)) || (action->getDetails()->button.button == SDL_BUTTON_RIGHT))
 	{		
 		_game->pushState(new SoldierInfoState(_base, _lstSoldiers->getSelectedRow()));
 	}
