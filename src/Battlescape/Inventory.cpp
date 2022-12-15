@@ -1051,16 +1051,16 @@ void Inventory::mouseClick(Action *action, State *state)
 								if (item->getFuseTimer() == -1)
 								{
 									// Prime that grenade!
-									if (fuseType == BFT_SET)
-									{
-										_game->pushState(new PrimeGrenadeState(0, true, item));
-									}
-									else
+									if (fuseType != BFT_SET || _game->isCtrlPressed())
 									{
 										_warning->showMessage(_game->getLanguage()->getString(item->getRules()->getPrimeActionMessage()));
 										item->setFuseTimer(item->getRules()->getFuseTimerDefault());
 										arrangeGround();
-										playSound(item->getRules()->getPrimeSound()); // prime sound
+										playSound(item->getRules()->getPrimeSound()); // prime sound																														
+									}
+									else
+									{
+										_game->pushState(new PrimeGrenadeState(0, true, item));
 									}
 								}
 								else

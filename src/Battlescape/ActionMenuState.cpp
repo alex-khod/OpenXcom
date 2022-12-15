@@ -317,14 +317,14 @@ void ActionMenuState::handleAction()
 		else if (_action->type == BA_PRIME)
 		{
 			const BattleFuseType fuseType = weapon->getFuseTimerType();
-			if (fuseType == BFT_SET)
+			if (fuseType != BFT_SET || _game->isCtrlPressed())
 			{
-				_game->pushState(new PrimeGrenadeState(_action, false, 0));
+				_action->value = weapon->getFuseTimerDefault();
+				_game->popState();							
 			}
 			else
 			{
-				_action->value = weapon->getFuseTimerDefault();
-				_game->popState();
+				_game->pushState(new PrimeGrenadeState(_action, false, 0));
 			}
 		}
 		else if (_action->type == BA_UNPRIME)
