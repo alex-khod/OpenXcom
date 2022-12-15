@@ -107,7 +107,7 @@ OptionsGeoscapeState::OptionsGeoscapeState(OptionsOrigin origin) : OptionsBaseSt
 
 	_txtDogfightSpeed->setText(tr("STR_DOGFIGHT_SPEED"));
 
-	_slrDogfightSpeed->setRange(50, 20);
+	_slrDogfightSpeed->setRange(50, 5);
 	_slrDogfightSpeed->setValue(Options::dogfightSpeed);
 	_slrDogfightSpeed->onChange((ActionHandler)&OptionsGeoscapeState::slrDogfightSpeedChange);
 	_slrDogfightSpeed->setTooltip("STR_DOGFIGHT_SPEED_DESC");
