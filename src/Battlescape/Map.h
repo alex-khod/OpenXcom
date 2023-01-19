@@ -21,6 +21,7 @@
 #include "../Engine/Options.h"
 #include "../Engine/Collections.h"
 #include "../Mod/MapData.h"
+#include "../Interface/NumberText.h"
 #include "Position.h"
 #include "Particle.h"
 #include <vector>
@@ -105,6 +106,7 @@ private:
 
 	void drawUnit(UnitSprite &unitSprite, Tile *unitTile, Tile *currTile, Position tileScreenPosition, bool topLayer, BattleUnit* movingUnit = nullptr);
 	void drawTerrain(Surface *surface);
+	void drawTerrainSub(Surface *surface, Position beginPos, Position endPos, Position bulletLow, Position bulletHigh, Position bulletPositionScreen, NumberText* _numWaypid);
 	int getTerrainLevel(const Position& pos, int size) const;
 	int getWallShade(TilePart part, Tile* tileFrot);
 	int _iconHeight, _iconWidth, _messageColor;
