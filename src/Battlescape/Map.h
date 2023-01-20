@@ -103,6 +103,9 @@ private:
 	bool _previewSettingArrows, _previewSettingTu, _previewSettingEnergy;
 	Text *_txtAccuracy;
 	SurfaceSet *_projectileSet;
+	Surface *_sublayersCacheSurface = nullptr;
+	Position _sublayersCachePos;
+	bool _sublayersCacheIsMoving;
 
 	void drawUnit(UnitSprite &unitSprite, Tile *unitTile, Tile *currTile, Position tileScreenPosition, bool topLayer, BattleUnit* movingUnit = nullptr);
 	void drawTerrain(Surface *surface);
