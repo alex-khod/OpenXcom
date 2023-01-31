@@ -127,7 +127,8 @@ void UnitWalkBState::think()
 			(_parent->getSave()->getTile(_unit->getDestination())->getUnit() == _unit))
 		{
 			bool onScreenBoundary = (_unit->getVisible() && _parent->getMap()->getCamera()->isOnScreen(_unit->getPosition(), true, size, true));
-			_unit->keepWalking(_parent->getSave(), onScreenBoundary); // advances the phase
+			bool fullWalkCycle = !Options::skipWalkCycle && onScreenBoundary;
+			_unit->keepWalking(_parent->getSave(), fullWalkCycle); // advances the phase
 			playMovementSound();
 			if (_parent->getSave()->isPreview())
 			{
