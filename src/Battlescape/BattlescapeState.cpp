@@ -2852,6 +2852,11 @@ inline void BattlescapeState::handle(Action *action)
 				{
 					saveVoxelView();
 				}
+
+				if (key == Options::keySkipWalkCycle)
+				{
+					Options::skipWalkCycle = !Options::skipWalkCycle;
+				}
 			}
 		}
 	}
