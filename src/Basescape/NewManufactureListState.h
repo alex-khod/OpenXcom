@@ -80,7 +80,7 @@ public:
 	void btnMarkAllAsSeenClick(Action *action);
 	/// Fills the list of possible productions.
 	void fillProductionList(bool refreshCategories);
-	int getApproxMonthlyProfit(RuleManufacture *item) const;
+	int getApproxMonthlyProfit(const RuleManufacture *item) const;
 };
 
 }

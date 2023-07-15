@@ -312,9 +312,9 @@ void ConfirmDestinationState::btnOkClick(Action *)
 		if (craft != _crafts.front())
 		{
 			if (_game->isCtrlPressed())
-			(*i)->setDestination(_target);
+			craft->setDestination(_target);
 			else
-			(*i)->setDestination(_crafts.front());
+			craft->setDestination(_crafts.front());
 		}
 
 		if (craft->getRules()->canAutoPatrol())

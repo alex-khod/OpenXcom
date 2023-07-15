@@ -163,10 +163,10 @@ void NewManufactureListState::btnOkClick(Action *)
  * @param action A pointer to an Action.
  */
 
-int NewManufactureListState::getApproxMonthlyProfit(RuleManufacture *item) const
+int NewManufactureListState::getApproxMonthlyProfit(const RuleManufacture *item) const
 {	
 
-	auto getSaleValue = [] (RuleManufacture * item)
+	auto getSaleValue = [] (const RuleManufacture * item)
 	{	 
 		int _producedItemsValue = 0;
 		auto ruleCraft = item->getProducedCraft();
@@ -468,9 +468,9 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 			}
 
 			// monthly profit assuming ready materials and 10 engineers
-			int monthlyProfit = getApproxMonthlyProfit(*it);
-			_lstManufacture->addRow(4, tr((*it)->getName()).c_str(), tr((*it)->getCategory()).c_str(), ss.str().c_str(), Unicode::formatFunding(monthlyProfit).c_str());
-			_displayedStrings.push_back((*it)->getName().c_str());
+			int monthlyProfit = getApproxMonthlyProfit(manuf);
+			_lstManufacture->addRow(4, tr(manuf->getName()).c_str(), tr(manuf->getCategory()).c_str(), ss.str().c_str(), Unicode::formatFunding(monthlyProfit).c_str());
+			_displayedStrings.push_back(manuf->getName().c_str());
 
 			// colors
 			if (basicFilter == MANU_FILTER_FACILITY_REQUIRED)
