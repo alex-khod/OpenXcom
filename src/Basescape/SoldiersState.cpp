@@ -248,25 +248,25 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 
 void SoldiersState::sortByAgentType(Action *action)
 {
-	_cbxSortBy->setSelected(3);
+	_cbxSortBy->setSelected(4);
 	cbxSortByChange(action);
 }
 
 void SoldiersState::sortByTU(Action *action)
 {
-	_cbxSortBy->setSelected(10);
+	_cbxSortBy->setSelected(11);
 	cbxSortByChange(action);
 }
 
 void SoldiersState::sortByHealth(Action *action)
 {
-	_cbxSortBy->setSelected(12);
+	_cbxSortBy->setSelected(13);
 	cbxSortByChange(action);
 }
 
 void SoldiersState::sortByFireAcc(Action *action)
 {
-	_cbxSortBy->setSelected(15);
+	_cbxSortBy->setSelected(16);
 	cbxSortByChange(action);
 }
 

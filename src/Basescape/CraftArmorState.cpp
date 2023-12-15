@@ -52,7 +52,7 @@ namespace OpenXcom
  * @param base Pointer to the base to get info from.
  * @param craft ID of the selected craft.
  */
-CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft(craft), _savedScrollPosition(0), _origSoldierOrder(*_base->getSoldiers()), _dynGetter(NULL)
+CraftArmorState::CraftArmorState(Base* base, size_t craft) : _base(base), _craft(craft), _savedScrollPosition(0), _origSoldierOrder(*_base->getSoldiers()), _dynGetter(NULL)
 {
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -101,7 +101,7 @@ CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft
 	sortOptions.push_back(tr("STR_ORIGINAL_ORDER"));
 	_sortFunctors.push_back(NULL);
 
-#define PUSH_IN(strId, functor) \
+#define PUSH_IN(strId, functor)       \
 	sortOptions.push_back(tr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor));
 
@@ -153,35 +153,39 @@ CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft
 	_lstSoldiers->onMouseClick((ActionHandler)&CraftArmorState::lstSoldiersClick, 0);
 	_lstSoldiers->onMousePress((ActionHandler)&CraftArmorState::lstSoldiersMousePress);
 
+	//auto addHotkeys = {"STR_AGENT_TYPE", "STR_TIME_UNITS", "STR_HEALTH", "STR_FIRING_ACCURACY"};
 	//auto p = [](CraftArmorState *state, size_t idx) { state->_cbxSortBy->setSelected(idx); state->_cbxSortBy };
-	//_cbxSortBy->onKeyboardPress(p(this, 3), Options::keyBattleActionItem1);		
-	
+	//auto handlerFunc = [](State::ActionHandler) { };
+	//ActionHandler p = (ActionHandler*) [](State * state, Action * action);
+	//auto handler = std::bind(this, handlerFunc);
+	//_cbxSortBy->onKeyboardPress((ActionHandler)&handler, Options::keyBattleActionItem1);	
+		
 	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByAgentType, Options::keyBattleActionItem1);
 	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByTU, Options::keyBattleActionItem2);
 	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByHealth, Options::keyBattleActionItem3);
 	_cbxSortBy->onKeyboardPress((ActionHandler)&CraftArmorState::sortByFireAcc, Options::keyBattleActionItem4);
 }
 
-void CraftArmorState::sortByAgentType(Action *action){
-	_cbxSortBy->setSelected(3);
+void CraftArmorState::sortByAgentType(Action *action){	
+	_cbxSortBy->setSelected(4);
 	cbxSortByChange(action);
 }
 
 void CraftArmorState::sortByTU(Action *action)
 {
-	_cbxSortBy->setSelected(10);
+	_cbxSortBy->setSelected(11);
 	cbxSortByChange(action);
 }
 
 void CraftArmorState::sortByHealth(Action *action)
 {
-	_cbxSortBy->setSelected(12);
+	_cbxSortBy->setSelected(13);
 	cbxSortByChange(action);
 }
 
 void CraftArmorState::sortByFireAcc(Action *action)
 {
-	_cbxSortBy->setSelected(15);
+	_cbxSortBy->setSelected(16);
 	cbxSortByChange(action);
 }
 

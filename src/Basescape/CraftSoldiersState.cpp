@@ -183,25 +183,25 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 
 void CraftSoldiersState::sortByAgentType(Action *action)
 {
-	_cbxSortBy->setSelected(3);
+	_cbxSortBy->setSelected(4);
 	cbxSortByChange(action);
 }
 
 void CraftSoldiersState::sortByTU(Action *action)
 {
-	_cbxSortBy->setSelected(10);
+	_cbxSortBy->setSelected(11);
 	cbxSortByChange(action);
 }
 
 void CraftSoldiersState::sortByHealth(Action *action)
 {
-	_cbxSortBy->setSelected(12);
+	_cbxSortBy->setSelected(13);
 	cbxSortByChange(action);
 }
 
 void CraftSoldiersState::sortByFireAcc(Action *action)
 {
-	_cbxSortBy->setSelected(15);
+	_cbxSortBy->setSelected(16);
 	cbxSortByChange(action);
 }
 
