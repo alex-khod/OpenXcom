@@ -132,8 +132,14 @@ void ResearchInfoState::buildUi()
 		{
 			_base->getStorageItems()->removeItem(_rule->getName(), 1);
 		}
+
+		if (_project->getAssigned() == 0)
+		{		
+			int preferredScientists = std::max(1, _rule->getCost() / 5);
+			moreByValue(preferredScientists);
+		}
 	}
-	setAssignedScientist();
+	setAssignedScientist();	
 	_btnMore->onMousePress((ActionHandler)&ResearchInfoState::morePress);
 	_btnMore->onMouseRelease((ActionHandler)&ResearchInfoState::moreRelease);
 	_btnMore->onMouseClick((ActionHandler)&ResearchInfoState::moreClick, 0);
