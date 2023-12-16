@@ -240,10 +240,24 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 	_lstSoldiers->onMouseClick((ActionHandler)&SoldiersState::lstSoldiersClick, 0);
 	_lstSoldiers->onMousePress((ActionHandler)&SoldiersState::lstSoldiersMousePress);
 
+	if (isTransformationAvailable)
+		_cbxScreenActions->onKeyboardPress((ActionHandler)&SoldiersState::viewTransformations, Options::keyBasescapeTransfer);
+
 	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByAgentType, Options::keyBattleActionItem1);
 	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByTU, Options::keyBattleActionItem2);
 	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByHealth, Options::keyBattleActionItem3);
 	_cbxSortBy->onKeyboardPress((ActionHandler)&SoldiersState::sortByFireAcc, Options::keyBattleActionItem4);
+}
+
+void SoldiersState::viewTransformations(Action* action)
+{
+	auto transformIt = std::find(_availableOptions.begin(), _availableOptions.end(), "STR_TRANSFORMATIONS_OVERVIEW");
+	if (transformIt != _availableOptions.end())
+	{
+		size_t idx = transformIt - _availableOptions.begin();
+		_cbxScreenActions->setSelected(idx);
+		cbxScreenActionsChange(action);
+	}		
 }
 
 void SoldiersState::sortByAgentType(Action *action)

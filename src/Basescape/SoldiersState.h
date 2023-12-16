@@ -55,7 +55,8 @@ private:
 	void initList(size_t scrl);
 public:
 	/// Creates the Soldiers state.
-  SoldiersState(Base *base);  
+  SoldiersState(Base *base);
+  void viewTransformations(Action* action);
   void sortByAgentType(Action *action);
   void sortByTU(Action *action);
   void sortByHealth(Action *action);
