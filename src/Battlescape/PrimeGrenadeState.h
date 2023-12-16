@@ -53,6 +53,7 @@ public:
 	/// Handler for right-clicking anything.
 	void handle(Action *action) override;
 	/// Handler for clicking a button.
+	void keyboardPress(Action* action);
 	void btnClick(Action *action);
 };
 

@@ -109,7 +109,7 @@ PrimeGrenadeState::PrimeGrenadeState(BattleAction *action, bool inInventoryView,
 		_number[i]->setAlign(ALIGN_CENTER);
 		_number[i]->setVerticalAlign(ALIGN_MIDDLE);
 	}
-
+	_button[0]->onKeyboardPress((ActionHandler)&PrimeGrenadeState::keyboardPress);
 	centerAllSurfaces();
 	lowerAllSurfaces();
 }
@@ -137,9 +137,56 @@ void PrimeGrenadeState::handle(Action *action)
 }
 
 
+void PrimeGrenadeState::keyboardPress(Action* action)
+{	
+	SDLKey keys[] = {
+		Options::keyCancel,
+		Options::keyBattleActionItem1,
+		Options::keyBattleActionItem2,
+		Options::keyBattleActionItem3,
+		Options::keyBattleActionItem4
+	};
+	int key = action->getDetails()->key.keysym.sym;
+	int btnID = -1;
+	for (size_t i = 0; i < 5; i++)
+	{
+		if (key == keys[i])
+		{
+			if (i == 0)
+			{
+				// just cancel
+				if (!_inInventoryView)
+					_action->value = btnID;
+				_game->popState();				
+			}				
+			btnID = i - 1;
+		}
+	}
+
+	if (btnID != -1){
+		if (_inInventoryView)
+		{
+			_grenadeInInventory->setFuseTimer(0 + btnID);
+			// prime sound
+			int sound = _grenadeInInventory->getRules()->getPrimeSound();
+			if (sound != Mod::NO_SOUND)
+			{
+				_game->getMod()->getSoundByDepth(_game->getSavedGame()->getSavedBattle()->getDepth(), sound)->play();
+			}
+		}
+		else
+		{
+			_action->value = btnID;
+		}
+		_game->popState();
+		if (!_inInventoryView)
+			_game->popState();
+	}
+}
 /**
  * Executes the action corresponding to this action menu item.
  * @param action Pointer to an action.
+ * 
  */
 void PrimeGrenadeState::btnClick(Action *action)
 {
