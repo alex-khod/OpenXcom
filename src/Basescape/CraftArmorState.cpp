@@ -538,6 +538,10 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 			SavedGame *save;
 			save = _game->getSavedGame();
 			Armor *a = _game->getMod()->getArmor(save->getLastSelectedArmor());
+			if (_game->isShiftPressed())
+			{
+				a = s->getRules()->getDefaultArmor();
+			}
 			bool armorUnlocked = true;
 			if (a && a->getRequiredResearch() && !_game->getSavedGame()->isResearched(a->getRequiredResearch()))
 			{
