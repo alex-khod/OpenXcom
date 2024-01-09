@@ -12,144 +12,26 @@ and the [wiki](https://www.ufopaedia.org/index.php/OpenXcom).
 
 Uses modified code from SDL\_gfx (LGPL) with permission from author.
 
-## Installation
+## Branch readme
+This is fork from Meridian's OXCE branch (currently 7.9.18.0), intended for small lazy QoL features, mainly around X-Com Files / XPiratez - may not work properly with other mods.
 
-OpenXcom requires a vanilla copy of the X-COM resources -- from either or both
-of the original games.  If you own the games on Steam, the Windows installer
-will automatically detect it and copy the resources over for you.
+Features:
+- View UFOPaedia from tech tree viewer on right click (RMB)
+- Hotkeys for sorting soldier screens (1234 = Battlescape center-on-enemy sort by Agent type, TU, Health, Accuracy, 12 - PST/PSK in psi-lab)
+- Default value for scientists on a new project, as fixed 0.2 ratio of the project cost.
+- Same 1234 hotkeys for Grenade prime on dialog.
+- CTRL+RMB to pre-prime grenades instantly, without dialog, while in pre-battle equipment screen.
+- Hotkey for "soldier transformations" screen, T.
+- Shift+RMB to remove armor on soldier armor screen
+- Ctrl+RMB to view soldier stats from craft screen.
+- Experience gained "marks" next to soldier names in battlescape. (+ any, - melee, * psi).
+- RMB to view target base's sell screen on Transfer screen (sometimes helps if all prisons are full).
+- Bigger limit on dogfight speed (repetitive ones get annoying).
+- Multiple interceptors targeting UFOs instead of escorting (CTRL+Click on confirmation screen).
+- Hotkey for skipping walk animation (STR_SKIP_WALK_CYCLE key, home by default).
 
-If you want to copy things over manually, you can find the Steam game folders
-at:
-
-    UFO: "Steam\SteamApps\common\XCom UFO Defense\XCOM"
-    TFTD: "Steam\SteamApps\common\X-COM Terror from the Deep\TFD"
-
-Do not use modded versions (e.g. with XcomUtil) as they may cause bugs and
-crashes.  Copy the UFO subfolders to the UFO subdirectory in OpenXcom's data
-or user folder and/or the TFTD subfolders to the TFTD subdirectory in OpenXcom's
-data or user folder (see below for folder locations).
-
-## Mods
-
-Mods are an important and exciting part of the game.  OpenXcom comes with a set
-of standard mods based on traditional XcomUtil and UFOExtender functionality.
-There is also a [mod portal website](https://openxcom.mod.io/) with a thriving
-mod community with hundreds of innovative mods to choose from.
-
-To install a mod, go to the mods subdirectory in your user directory (see below
-for folder locations).  Extract the mod into a new subdirectory.  WinZip has an
-"Extract to" option that creates a directory whose name is based on the archive
-name.  It doesn't really matter what the directory name is as long as it is
-unique.  Some mods are packed with extra directories at the top, so you may
-need to move files around inside the new mod directory to get things straighted
-out.  For example, if you extract a mod to mods/LulzMod and you see something
-like:
-
-    mods/LulzMod/data/TERRAIN/
-    mods/LulzMod/data/Rulesets/
-
-and so on, just move everything up a level so it looks like:
-
-    mods/LulzMod/TERRAIN/
-    mods/LulzMod/Rulesets/
-
-and you're good to go!  Enable your new mod on the Options -> Mods page in-game.
-
-## Directory Locations
-
-OpenXcom has three directory locations that it searches for user and game files:
-
-<table>
-  <tr>
-    <th>Folder Type</th>
-    <th>Folder Contents</th>
-  </tr>
-  <tr>
-    <td>user</td>
-    <td>mods, savegames, screenshots</td>
-  </tr>
-  <tr>
-    <td>config</td>
-    <td>game configuration</td>
-  </tr>
-  <tr>
-    <td>data</td>
-    <td>UFO and TFTD data files, standard mods, common resources</td>
-  </tr>
-</table>
-
-Each of these default to different paths on different operating systems (shown
-below).  For the user and config directories, OpenXcom will search a list of
-directories and use the first one that already exists.  If none exist, it will
-create a directory and use that.  When searching for files in the data
-directory, OpenXcom will search through all of the named directories, so some
-files can be installed in one directory and others in another.  This gives
-you some flexibility in case you can't copy UFO or TFTD resource files to some
-system locations.  You can also specify your own path for each of these by
-passing a commandline argument when running OpenXcom.  For example:
-
-    openxcom -data "$HOME/bin/OpenXcom/usr/share/openxcom"
-
-or, if you have a fully self-contained installation:
-
-    openxcom -data "$HOME/games/openxcom/data" -user "$HOME/games/openxcom/user" -config "$HOME/games/openxcom/config"
-
-### Windows
-
-User and Config folder:
-- C:\Documents and Settings\\\<user\>\My Documents\OpenXcom (Windows 2000/XP)
-- C:\Users\\\<user\>\Documents\OpenXcom (Windows Vista/7)
-- \<game directory\>\user
-- .\user
-
-Data folders:
-- C:\Documents and Settings\\\<user\>\My Documents\OpenXcom\data (Windows 2000/XP)
-- C:\Users\\\<user\>\Documents\OpenXcom\data (Windows Vista/7/8)
-- \<game directory\>
-- . (the current directory)
-
-### Mac OS X
-
-User and Config folder:
-- $XDG\_DATA\_HOME/openxcom (if $XDG\_DATA\_HOME is defined)
-- $HOME/Library/Application Support/OpenXcom
-- $HOME/.openxcom
-- ./user
-
-Data folders:
-- $XDG\_DATA\_HOME/openxcom (if $XDG\_DATA\_HOME is defined)
-- $HOME/Library/Application Support/OpenXcom (if $XDG\_DATA\_HOME is not defined)
-- $XDG\_DATA\_DIRS/openxcom (for each directory in $XDG\_DATA\_DIRS if $XDG\_DATA\_DIRS is defined)
-- /Users/Shared/OpenXcom
-- . (the current directory)
-
-### Linux
-
-User folder:
-- $XDG\_DATA\_HOME/openxcom (if $XDG\_DATA\_HOME is defined)
-- $HOME/.local/share/openxcom (if $XDG\_DATA\_HOME is not defined)
-- $HOME/.openxcom
-- ./user
-
-Config folder:
-- $XDG\_CONFIG\_HOME/openxcom (if $XDG\_CONFIG\_HOME is defined)
-- $HOME/.config/openxcom (if $XDG\_CONFIG\_HOME is not defined)
-
-Data folders:
-- $XDG\_DATA\_HOME/openxcom (if $XDG\_DATA\_HOME is defined)
-- $HOME/.local/share/openxcom (if $XDG\_DATA\_HOME is not defined)
-- $XDG\_DATA\_DIRS/openxcom (for each directory in $XDG\_DATA\_DIRS if $XDG\_DATA\_DIRS is defined)
-- /usr/local/share/openxcom
-- /usr/share/openxcom
-- . (the current directory)
-
-## Configuration
-
-OpenXcom has a variety of game settings and extras that can be customized, both
-in-game and out-game. These options are global and affect any old or new
-savegame.
-
-For more details please check the [wiki](https://ufopaedia.org/index.php/Options_(OpenXcom)).
+## Usage
+Install OXCE. Take .exe from releases section or build one yourself. Put it into installation folder.
 
 ## Development
 
