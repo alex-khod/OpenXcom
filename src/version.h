@@ -18,9 +18,9 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define OPENXCOM_VERSION_ENGINE "MoreQoL"
-#define OPENXCOM_VERSION_SHORT "MoreQoL 7.9.18"
-#define OPENXCOM_VERSION_LONG "7.9.18.0"
+#define OPENXCOM_VERSION_ENGINE "Extended"
+#define OPENXCOM_VERSION_SHORT "MoreQoL 7.9.18r1"
+#define OPENXCOM_VERSION_LONG "7.9.18.0r1"
 #define OPENXCOM_VERSION_NUMBER 7,9,18,0
 
 #ifndef OPENXCOM_VERSION_GIT
